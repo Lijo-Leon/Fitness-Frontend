@@ -63,7 +63,7 @@ function Form({ fitnessData, setFitnessData }) {
             resetForm();
             setEditingId(null);
         } catch (error) {
-            console.error("❌ Error saving data:", error);
+            console.error("Error saving data:", error);
             alert("Failed to save data. Please try again.");
         }
     };
@@ -141,11 +141,11 @@ function Form({ fitnessData, setFitnessData }) {
     return (
         <div className="w-full px-4 md:px-20 mt-6 pb-10 bg-amber-50">
             <div className="box pb-8 md:pb-15 bg-black flex flex-col-reverse md:flex-row items-center rounded-2xl gap-8 md:gap-15 text-amber-50 tracking-wide text-lg md:text-xl px-4 md:px-10 font-semibold pt-5">
-                <div className="left details mt-14 md:mt-12 flex flex-col justify-center gap-5 md:gap-17 w-full md:w-auto">
+                <div className="left details mt-14 md:mt-12 hidden md:flex flex-col justify-center gap-5 md:gap-17 w-full md:w-auto">
                     <div className="day bg-amber-50 h-40 w-full md:w-90 rounded-xl px-2 pt-2 md:mt-0 mt-4">
                         <div className="head text-black flex justify-between px-1 pt-2 pl-4 md:pl-7">
                             <h1 className="text-[28px] md:text-[39px] font-bold tracking-wider font1">
-                                ACTIVE DAYS
+                                ACTIVE DAY
                             </h1>
                             <CalendarDays className="text-green-500 h-9 w-9 md:h-11 md:w-11 p-2 border-green-500 border-2 rounded-full" />
                         </div>
@@ -292,7 +292,7 @@ function Form({ fitnessData, setFitnessData }) {
                 </div>
             </div>
 
-            <div className="btns bg-black px-20 pb-9 rounded-2xl flex items-center justify-center gap-4 md:gap-8 w-full md:-mt-7 -mt-155">
+            <div className="btns bg-black px-20 pb-9 rounded-2xl flex items-center justify-center gap-4 md:gap-8 w-full md:-mt-7 -mt-10 pt-9 md:pt-0">
                 <button
                     onClick={resetForm}
                     className="bg-red-900 text-amber-50 font-semibold py-2 w-1/2 rounded-lg hover:bg-red-900/90 transition text-sm md:text-base"
@@ -309,8 +309,8 @@ function Form({ fitnessData, setFitnessData }) {
             </div>
 
 
-            <div className=" bg-black text-amber-50 rounded-lg p-6 shadow border md:mt-8 mt-[600px]">
-                <h2 className="text-xl font-bold mb-4 text-amber-50">Saved Fitness Logs</h2>
+            <div className=" bg-black text-amber-50 rounded-lg p-6 shadow border md:mt-8 mt-10">
+                <h2 className="text-xl font-bold mb-4 text-amber-50">Saved Fitness Logs <span className="md:opacity-0 opacity-100 font-light ml-3">(Scroll Right)</span></h2>
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm text-left text-black border">
                         <thead className="bg-gray-100 border-b">

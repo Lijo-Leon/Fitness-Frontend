@@ -72,20 +72,19 @@ function Home({ addDetails, setAddDetails }) {
 
           <div className="right md:w-[35%] w-full h-full rounded-xl bg-black flex flex-col gap-5">
             <div className="top w-full h-[65%] rounded-xl bg-amber-50 overflow-hidden relative">
-              <img src="https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg" className='md:w-full w-81 md:h-full h-auto' alt="" />
+              <img src="https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg" className='md:w-full w-87 md:h-full h-auto' alt="" />
               <div className="overlay w-full absolute top-0 right-0 h-full bg-black/40"></div>
               <div className="down absolute md:bottom-3 bottom-1 w-full flex flex-col items-center gap-3">
                 <h1 className='text-amber-50 md:text-3xl text-2xl w-full font-bold font1 tracking-widest bg-white/10 backdrop-blur-2xl py-2 text-center'>Join Our Fitness Club</h1>
-                <a href="/joinclub">
+                <Link to="/joinclub">
                   <button className='scale-70 md:scale-100 lets-start flex items-center w-38 justify-center gap-4 bg-amber-50 text-black hover:bg-amber-50/90 transition duration-300 font-semibold pl-5 pr-1 h-12 md:ml-65 ml-46 rounded-full'>
                     Join Now
                     <MoveUpRight strokeWidth={2} className='btn1 bg-black text-amber-50 rounded-full h-9 w-9 p-2' />
                   </button>
-
-                </a>
+                </Link>
               </div>
-
             </div>
+
             <div className="bottom w-full h-[35%] rounded-xl bg-black flex gap-5">
               <div className="left w-1/2 h-full bg-amber-50/30 rounded-xl overflow-hidden relative flex items-center justify-center">
                 <img src="https://images.pexels.com/photos/13583539/pexels-photo-13583539.jpeg" className='absolute top-0 min-h-full min-w-full' alt="" />
