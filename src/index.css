@@ -1,0 +1,26 @@
+@import 'flowbite';
+@import "tailwindcss";
+@plugin "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";
+
+*, html, body{
+    scroll-behavior: smooth;
+}
+
+.font1{
+      font-family: "Bebas Neue", sans-serif;
+}
+
+.font2{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.btn1{
+    transition: all 0.2s ease-in-out;
+}
+
+.lets-start:hover .btn1{
+    transform: rotate(45deg);
+    background-color: black;
+    color: #e3f7ff;
+}
