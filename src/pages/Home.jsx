@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from "flowbite-react";
 import Header from '../components/Header';
-import { MoveUpRight } from 'lucide-react';
+import { ArrowDown, MoveUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 
@@ -9,7 +9,7 @@ function Home({ addDetails, setAddDetails }) {
   return (
     <div className='w-full relative'>
       <Header />
-      <div className="main pt-20 bg-amber-50 h-screen flex justify-center">
+      <div id='main' className="main pt-20 bg-amber-50 h-screen flex justify-center">
         <div className="title text-center">
           <h1 className='md:text-[18px] text-[12px] mt-17 font-bold tracking-wide'>ACHIEVE YOUR FITNESS GOAL</h1>
           <h1 className='font1 md:text-[170px] text-[80px] md:-mt-8  font-black tracking-[5px]'>UNLEASH <br />
@@ -24,6 +24,12 @@ function Home({ addDetails, setAddDetails }) {
                 <MoveUpRight strokeWidth={2} className='btn1 bg-amber-50 text-black rounded-full h-9 w-9 p-2' />
               </button>
             </Link>
+
+
+
+          </div>
+          <div className='mt-10'>
+            <h1 className='flex items-center justify-center gap-3 font-semibold'>SCROLL DOWN <ArrowDown size={28} strokeWidth={2} className='border-2 rounded-full p-1' /></h1>
           </div>
         </div>
       </div>
@@ -100,7 +106,15 @@ function Home({ addDetails, setAddDetails }) {
         </div>
       </div>
 
+      <div className="div flex md:justify-end items-center justify-center w-full  bg-amber-50 pb-10 md:pb-10 px-20">
+        <Link to={"/dashboard"}>
+          <button className='scale-90 md:scale-100 lets-start flex items-center md:w-39 w-[400px] justify-center gap-4 bg-amber-50 text-black hover:bg-amber-100/60 border-2 transition duration-300 font-semibold pl-5 pr-5 md:pr-1 h-12 md:ml-0  rounded-full'>
+            Start Now
+            <MoveUpRight strokeWidth={2} className='btn1 hidden md:flex bg-black text-amber-50 rounded-full h-9 w-9 p-2' />
+          </button>
+        </Link>
 
+      </div>
     </div>
   )
 }
