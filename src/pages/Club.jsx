@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../components/Header'
 import { MoveUpRight, Users } from 'lucide-react'
 import Swal from 'sweetalert2'
 
+
 function Club() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []); // runs once when component mounts
+
+
     const submit = () => {
         Swal.fire({
             title: "Good job!",
@@ -17,7 +23,7 @@ function Club() {
         <div className='relative bg-amber-50 min-h-screen w-full'>
             <Header />
 
-            <section className='pt-32 px-6 md:px-20 text-center w-full flex items-center justify-center flex-col'>
+            <section id='first' className='pt-32 px-6 md:px-20 text-center w-full flex items-center justify-center flex-col'>
                 <h1 className='font1 text-5xl md:text-7xl font-bold text-black tracking-wider'>
                     Join The <span className='text-amber-600'>FitNex</span> Community
                 </h1>

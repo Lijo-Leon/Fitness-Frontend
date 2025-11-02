@@ -8,6 +8,10 @@ import jsPDF from 'jspdf';
 import Swal from 'sweetalert2'
 
 function Dashboard() {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []); // runs once when component mounts
+
 
     const [fitnessData, setFitnessData] = useState({
         details: {

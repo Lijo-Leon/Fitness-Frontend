@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 
 function Home({ addDetails, setAddDetails }) {
+  
   return (
     <div className='w-full relative'>
       <Header />
