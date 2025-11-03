@@ -24,15 +24,15 @@ function Form({ fitnessData, setFitnessData }) {
         }));
     };
 
+
+    //Creating
     const handleSubmit = async () => {
-        const { date, calories, mealType } = fitnessData.details;
+        const { date, fooditems, calories, workout, duration, burned, mealType } = fitnessData.details;
 
-
-        if (!date || !calories || !mealType) {
+        if (!date || !fooditems || !calories || !workout || !duration || !burned || !mealType) {
             Swal.fire({
-                text: "Please fill all required fields (Date, Calories, Meal Type)",
+                text: "Please fill all required fields",
                 background: "beige"
-
             });
 
             return;
@@ -58,27 +58,30 @@ function Form({ fitnessData, setFitnessData }) {
                 });
 
             }
-
             fetchAllData();
             resetForm();
             setEditingId(null);
-        } catch (error) {
+        }
+        catch (error) {
             console.error("Error saving data:", error);
             alert("Failed to save data. Please try again.");
         }
     };
 
 
+    // Reading
     const fetchAllData = async () => {
         try {
             const response = await getAllFitnessDataAPI();
-            setAllData(response.data || []);
+            const reversedData = (response.data || []).reverse();
+            setAllData(reversedData);
         } catch (error) {
             console.error("Error fetching data:", error);
         }
-    };
+    };  
 
 
+    // Delete
     const handleDelete = async (id) => {
         try {
             await deleteFitnessDataAPI(id);
@@ -111,7 +114,7 @@ function Form({ fitnessData, setFitnessData }) {
         }
     };
 
-
+    //Update (Edit)
     const handleEdit = (item) => {
         setFitnessData({ details: item });
         setEditingId(item.id);
@@ -331,10 +334,10 @@ function Form({ fitnessData, setFitnessData }) {
                                     <td className="p-3">{item.date}</td>
                                     <td className="p-3">{item.mealType}</td>
                                     <td className="p-3 capitalize">{item.fooditems}</td>
-                                    <td className="p-3">{item.calories}</td>
+                                    <td className="p-3">{item.calories} kcal</td>
                                     <td className="p-3">{item.workout}</td>
-                                    <td className="p-3">{item.burned}</td>
-                                    <td className="p-3">{item.duration}</td>
+                                    <td className="p-3">{item.burned} kcal</td>
+                                    <td className="p-3">{item.duration} min</td>
                                     <td className="p-3 flex justify-center gap-3">
                                         <button
                                             onClick={() => handleEdit(item)}

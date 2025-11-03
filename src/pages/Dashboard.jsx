@@ -10,7 +10,7 @@ import Swal from 'sweetalert2'
 function Dashboard() {
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, []); // runs once when component mounts
+    }, []);
 
 
     const [fitnessData, setFitnessData] = useState({
@@ -28,6 +28,21 @@ function Dashboard() {
     const [fitnessList, setFitnessList] = useState([]);
     const [addDetails, setAddDetails] = useState(true);
 
+    const [searchInput, setSearchInput] = useState("");
+    const [searchQuery, setSearchQuery] = useState("");
+
+    const filteredList = fitnessList.filter((item) => {
+        const query = searchQuery.toLowerCase();
+        if (!query) return true;
+        return (
+            item.date.toLowerCase().includes(query) ||
+            item.fooditems.toLowerCase().includes(query) ||
+            item.workout.toLowerCase().includes(query) ||
+            item.mealType.toLowerCase().includes(query)
+        );
+    });
+
+
     useEffect(() => {
         fetchFitnessData();
     }, []);
@@ -35,7 +50,8 @@ function Dashboard() {
     const fetchFitnessData = async () => {
         try {
             const response = await getAllFitnessDataAPI();
-            setFitnessList(response.data);
+            const reversedData = (response.data || []).reverse();
+            setFitnessList(reversedData);
         } catch (error) {
             console.error("Error fetching fitness data:", error);
         }
@@ -45,6 +61,8 @@ function Dashboard() {
         try {
             await deleteFitnessDataAPI(id);
             fetchFitnessData();
+
+            //Sweet Alert
             let timerInterval;
             Swal.fire({
                 background: "beige",
@@ -108,16 +126,33 @@ function Dashboard() {
                     <div>
                         <div className="head w-full px-4 md:px-20 mt-8 md:mt-14 flex items-center">
                             <h1 className='font2 text-black ml-2 md:ml-7 text-2xl md:text-4xl'>HISTORY</h1>
-                            <div className="head-inner w-full h-full relative flex justify-end gap-2">
+
+
+                            <div className="head-inner w-full h-full relative flex justify-end items-center gap-2 md:h-13">
+                                <div className="md:w-[500px] w-[380px] md:right-50 flex md:flex-row md:justify-between justify-center items-center absolute md:top-0 top-20">
+                                    <input
+                                        type="text"
+                                        placeholder="Search by date, food, or workout..."
+                                        value={searchInput}
+                                        onChange={(e) => setSearchInput(e.target.value)}
+                                        className="w-full p-2 py-3 pl-8 rounded-full border-2 bg-amber-50 placeholder:italic border-black focus:outline-none focus:ring-1 focus:ring-black placeholder:text-black"
+                                    />
+                                    <button
+                                        onClick={() => setSearchQuery(searchInput)}
+                                        className='flex gap-2 bg-black text-amber-50 font-semibold px-5 py-2 rounded-full text-sm md:text-base md:right-1 right-2 absolute'>
+                                        Search
+                                    </button>
+                                </div>
+
                                 <button
                                     onClick={() => setAddDetails(false)}
-                                    className='flex gap-2 bg-black text-amber-50 font-semibold px-3 py-2 rounded text-sm md:text-base'>
+                                    className='flex gap-2 bg-black text-amber-50 h-11 font-semibold px-3 py-2 rounded text-sm md:text-base'>
                                     <Plus strokeWidth={2} />Add
                                 </button>
                             </div>
                         </div>
 
-                        <div className="main w-full px-4 md:px-20 mt-6 pb-10 min-h-screen">
+                        <div className="main w-full px-4 md:px-20 mt-30 md:mt-10 pb-10 min-h-screen">
                             <div className="box w-full pb-8 bg-black flex flex-col items-center rounded-2xl gap-8 text-amber-50 tracking-wide text-lg font-semibold px-4 md:px-10 pt-5">
                                 <div className="views w-full flex flex-col md:flex-row">
                                     <button className='w-full h-12 md:h-15 border border-amber-50/0 focus:border focus:border-b-amber-50 focus:text-amber-200 px-2 md:px-4 transition-all duration-200 text-sm md:text-xl uppercase'>Recently Added</button>
@@ -125,7 +160,7 @@ function Dashboard() {
 
                                 {fitnessList.length > 0 ? (
                                     <div className="details w-full h-auto mt-6 flex flex-col gap-5">
-                                        {fitnessList.map((item) => (
+                                        {filteredList.map((item) => (
                                             <div key={item.id} id={`fitness-item-${item.id}`} className="bg-amber-50 text-black rounded-xl p-4 flex flex-col md:flex-row justify-between items-center shadow-md">
                                                 <div className='w-full'>
                                                     <h1 className='text-2xl font-bold font1 mb-2 underline'>{item.date}</h1>
@@ -172,10 +207,16 @@ function Dashboard() {
                                                 </div>
                                             </div>
                                         ))}
+
+                                        {filteredList.length === 0 && searchQuery && (
+                                            <p className="md:text-4xl mb-10 text-center">No results found for "<span className='italic'>{searchQuery}</span>"</p>
+                                        )}
+
                                     </div>
-                                ) : (
-                                    <p className='text-gray-300 mt-10'>No fitness data added yet.</p>
-                                )}
+                                )
+                                    : (
+                                        <p className='md:text-4xl mb-10 text-center'>No fitness data added yet.</p>
+                                    )}
                             </div>
                         </div>
                     </div>
